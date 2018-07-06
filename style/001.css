@@ -1,0 +1,49 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    height: 2000px;
+    background: rgba(0,0,0,.1);
+}
+.clearfix::after{
+    content: '';
+    display: block;
+    clear: both;
+}
+li{
+    list-style: none;
+}
+.navWrapper{
+    width: 100%;
+    position: fixed;
+    left: 0;
+    top:0;
+}
+nav{
+    padding: 30px 20px;
+    background: rgb(7,203,201);
+    color: white;
+    font-size: 20px;
+    box-shadow: 0 0 3px 3px rgba(0,0,0,.2);
+    transition:  all .3s;  
+    font-weight: bold;
+}
+nav.active{
+    padding: 20px 20px;
+    background: white;  
+    color: black;
+}
+nav > .logo{
+    float: left;
+    font-size: 30px;
+    font-family: fantasy;
+}
+nav > ul{
+    float: right;
+}
+nav > ul > li{
+    float: left;
+    margin: 0 10px;
+    line-height: 36px;
+}
