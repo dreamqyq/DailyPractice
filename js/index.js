@@ -1,7 +1,5 @@
-var listBtn = document.getElementById('catalogue'),
-	list = document.getElementById('list');
+var listBtn = document.getElementById('catalogue');
 
 listBtn.onclick = function () {
 	this.classList.toggle('active');
-	list.classList.toggle('active');
 }
