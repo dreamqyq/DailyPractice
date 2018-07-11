@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自写类jQuery</title>
+	<style>
+		*{font-size: 22px;}
+		.clearfix::after{content: '';display: block;clear: both;}
+		h1{text-align: center;}
+		p{border: 1px solid blue;margin: 40px 0;}
+		p>span{color: red}
+		.show{width: 100%;height: 300px;border: 1px solid red;position: relative;}
+		.box{width: 70px;height: 50px;float: left;background: #ABB1BA;margin: 20px 20px;}
+		.red{background: red;}
+		button{position: absolute;bottom: 10px;left: 10px;}
+	</style>
+</head>
+<body>
+	<h1>用原生JS实现jQuery的一些操作</h1>
+	<p> <span>实现的效果：</span><br>
+		window.jQuery = ??? <br>
+		window.$ = jQuery <br>
+		<br>
+		var $div = $('div') <br>
+		$div.addClass('red') // 可将所有 div 的 class 添加一个 red <br>
+		$div.setText('hi') // 可将所有 div 的 textContent 变为 hi <br>
+	</p>
+	<h2>展示区</h2>
+	<section class="show">
+		<content class="clearfix">
+			<div class="box" id="box">box1</div>
+			<div class="box">box2</div>
+			<div class="box">box3</div>
+			<div class="box">box4</div>
+		</content>
+		<button id="btn">xxx</button>
+	</section>
+	
+	<script src="../js/004.js"></script>
+</body>
+</html>
