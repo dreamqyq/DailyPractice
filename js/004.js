@@ -15,14 +15,23 @@ window.jQuery = function(nodeOrSelector){
 	}
 
 	nodes.addClass = function(classes){
-		classes.forEach((value) => {
-			for(let i = 0; i < nodes.length; i++){
-				nodes[i].classList.add(classes)	
+		for(let key in classes){
+			for(let i = 0;i < nodes.length; i++){
+				let methodName = classes[key] ? 'add' : 'remove'
+				nodes[i].classList[methodName](key)
 			}
-		})
+			
+		}
 		
 	}
-	nodes.setText = function(text){
+	nodes.Text = function(text){
+		var texts = []
+		if(text === undefined){
+			for(let i = 0;i<nodes.length; i++){
+				texts[i] = nodes[i].textContent
+			}
+			return texts
+		}
 		for(let i = 0;i < nodes.length; i++){
 			nodes[i].textContent = text;
 		}
@@ -34,5 +43,11 @@ window.jQuery = function(nodeOrSelector){
 
 window.$ = window.jQuery
 
-$('div').addClass.call($('div'),['red'])
-$('div').setText.call($('div'),'hi')
+
+console.log($(box).Text.call($(box)))
+console.log($('div').Text.call($('div')))
+
+btn.onclick = function () {
+	$('div').addClass.call($('div'),{red:true,box:true,green:false})
+	$('div').Text.call($('div'),'hi')
+}
