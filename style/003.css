@@ -1,0 +1,26 @@
+*{margin: 0;padding: 0}
+.clearfix::after{
+	content: '';
+	display: block;
+	clear: both;
+}
+h1{
+	text-align: center;
+	margin: 20px 0;
+}
+.wrapper{
+	width: 1200px;
+	margin: 0 auto;
+}
+.wrapper > .banner{
+	width: 1200px;
+	height: 460px;
+	overflow: hidden;
+}
+.wrapper > .banner > .item{
+	float: left;
+}
+
+.hidden{
+	display: none;
+}
