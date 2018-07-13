@@ -7,23 +7,26 @@ a:visited {color: gray; }
 a:hover{color: red; }
 a:active{color: orange; }
 section.catalogue{
-	border: 1px solid red;
-	transition: all .3s;
+	/*border: 1px solid red;*/
+	cursor: pointer;
 }
 section.catalogue.active{
-	border: 1px solid rgb(7,203,201);
+	/*border: 1px solid rgb(7,203,201);*/
+	/*transition: all .3s;*/
 }
-section.catalogue p::after{
-	content: ': >';
-	display: inline-block;
+section.catalogue > p >.arrow::after{
+	content: '➳';
 }
-section.catalogue.active p::after{
-	content: ': |';
+section.catalogue.active > p > .arrow::after{
+	content: '➴';
 }
-section.catalogue ol.list{
-	display: none;
+section.catalogue > ol.list{
+	transition: all .5s;
+	opacity: 0;
+	transform: translateY(100px);
 }
 section.catalogue.active ol.list{
-	display: block;
+	opacity: 1;
+	transform: translateY(0);
 }
 
