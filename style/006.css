@@ -12,10 +12,11 @@ div.popover{
   height:200px;
   line-height:200px;
   background:#11A0EF;
-  display:none;
   position:absolute;
   left:-20px;
   top:36px;
+  transition:all .5s;
+  opacity:0;
 }
 div.popover::after{
   content:'';
@@ -24,9 +25,10 @@ div.popover::after{
   left:50%;
   margin-left:-10px;
   display:block;
+  border:1px solid red;
   border:10px solid transparent;
   border-bottom-color:#11A0EF;
 }
 div.popover.active{
-  display:block;
+  opacity:1;
 }
