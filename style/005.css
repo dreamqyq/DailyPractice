@@ -1,0 +1,36 @@
+*{margin:0;padding:0;box-sizing:border-box;}
+div{
+  padding:20px;
+  border:1px solid black;
+  display:flex;
+  flex:1;
+  border-radius:50%;
+  transition:all .5s;
+  background:white;
+}
+div.red{
+  width:500px;
+  height:500px;
+  margin:50px auto;
+}
+div.red.active{
+  background:red;
+}
+div.orange.active{
+  background:orange;
+}
+div.yellow.active{
+  background:yellow;
+}
+div.green.active{
+  background:green;
+}
+div.cyan.active{
+  background:cyan;
+}
+div.blue.active{
+  background:blue;
+}
+div.purple.active{
+  background:purple;
+}
