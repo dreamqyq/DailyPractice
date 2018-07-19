@@ -1,0 +1,32 @@
+*{margin:0;padding:0;}
+body{
+  text-align: center;
+}
+div.wrapper{
+  display:inline-block;
+  position:relative;
+  margin:100px;
+}
+div.popover{
+  width:100px;
+  height:200px;
+  line-height:200px;
+  background:#11A0EF;
+  display:none;
+  position:absolute;
+  left:-20px;
+  top:36px;
+}
+div.popover::after{
+  content:'';
+  position:absolute;
+  top:-20px;
+  left:50%;
+  margin-left:-10px;
+  display:block;
+  border:10px solid transparent;
+  border-bottom-color:#11A0EF;
+}
+div.popover.active{
+  display:block;
+}
