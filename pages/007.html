@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>鸡兔同笼问题</title>
+</head>
+<body>
+  <p>请输入头和脚的数值</p>
+  <form action="" id="myForm">
+    <label for="">头：</label>
+    <input type="text" name="heads">
+    <label for="">脚：</label>
+    <input type="text" name="legs">
+    <input type="submit">
+    <br>
+    <label for="">结果：</label>
+    <input type="" name="result">
+  </form>
+
+ <script>
+  let form = document.querySelector('#myForm')
+  form.addEventListener('submit',function(e){
+    e.preventDefault()
+    let heads = isNumber(form.querySelector('input[name="heads"]').value)
+    let legs = isNumber(form.querySelector('input[name="legs"]').value)
+    if(heads === 'error' || legs === 'error'){
+      form.querySelector('input[name="result"]').value = '不要瞎搞，请填正确的数字'
+    }else{
+      let result = getResult(heads,legs)
+      form.querySelector('input[name="result"]').value = `鸡有${result.chickens}只，兔有${result.rabbits}只` 
+    }
+    
+  })
+  function getResult(heads,legs){
+    let chickens = legs/2 - heads 
+    let rabbits = heads - chickens
+    return {chickens:chickens,rabbits:rabbits} 
+  }
+  function isNumber(num){
+    num = Number(num,10)
+    if(isNaN(num)){
+      num = parseInt(num,10)
+      form.querySelector('input[name="result"]').style.color = 'red'
+      return 'error'
+    }
+    else{
+      form.querySelector('input[name="result"]').style.color = 'blue'
+      return num
+    }
+  }
+
+ </script>
+</body>
+</html>
