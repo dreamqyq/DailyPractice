@@ -24,9 +24,11 @@
     let heads = isNumber(form.querySelector('input[name="heads"]').value)
     let legs = isNumber(form.querySelector('input[name="legs"]').value)
     if(heads === 'error' || legs === 'error'){
+      form.querySelector('input[name="result"]').style.color = 'red'
       form.querySelector('input[name="result"]').value = '不要瞎搞，请填正确的数字'
     }else{
       let result = getResult(heads,legs)
+      form.querySelector('input[name="result"]').style.color = 'blue'
       form.querySelector('input[name="result"]').value = `鸡有${result.chickens}只，兔有${result.rabbits}只` 
     }
     
@@ -40,11 +42,9 @@
     num = Number(num,10)
     if(isNaN(num)){
       num = parseInt(num,10)
-      form.querySelector('input[name="result"]').style.color = 'red'
       return 'error'
     }
     else{
-      form.querySelector('input[name="result"]').style.color = 'blue'
       return num
     }
   }
