@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>倒计时插件</title>
+  <style>
+    span{border:1px solid red;}
+  </style>
+</head>
+<body>
+  <div id="timeBox"></div>
+  <script>
+    class countDown {
+      constructor(selector, second) {
+        this.view = document.querySelector(selector)
+        this.origin = second
+        this.seconds = null
+        this.minutes = null
+        this.hours = null
+      }
+      init(){
+        this.secondConvertTime()
+        let domHour = this.createElement('span','hour',this.hours,this.view)
+        let domMinute = this.createElement('span','minute',this.minutes,this.view)
+        let domSecond = this.createElement('span','second',this.seconds,this.view)
+        this.secondReduce(domHour,domMinute,domSecond)
+      }
+
+      timeChange(domHour,domMinute,domSecond){
+        this.secondConvertTime()
+        domHour.textContent = this.hours
+        domMinute.textContent = this.minutes
+        domSecond.textContent = this.seconds
+      }
+      createElement(tag,className,content,parent){
+        let ele = document.createElement(tag)
+        ele.classList.add(className)
+        ele.textContent = content
+        parent.append(ele)
+        return ele
+      }
+      secondConvertTime() {
+        this.hours = Math.floor(this.origin / 3600)
+        this.minutes = Math.floor((this.origin - this.hours * 3600) / 60)
+        this.seconds = this.origin % 60
+      }
+      secondReduce(domHour,domMinute,domSecond) {
+        let timer = setInterval(()=>{
+          this.origin --
+          if(this.origin <= 0){
+            console.log('END')
+            clearInterval(timer)
+          }
+          this.timeChange(domHour,domMinute,domSecond)
+        },1000)
+      }
+    }
+
+    let timeDown = new countDown('#timeBox',100000)
+    timeDown.init()
+    console.log(timeBox)
+  </script>
+</body>
+</html>
