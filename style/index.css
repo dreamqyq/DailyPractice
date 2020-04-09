@@ -10,10 +10,6 @@ section.catalogue{
 	/*border: 1px solid red;*/
 	cursor: pointer;
 }
-section.catalogue.active{
-	/*border: 1px solid rgb(7,203,201);*/
-	/*transition: all .3s;*/
-}
 section.catalogue > p >.arrow::after{
 	content: '➳';
 }
