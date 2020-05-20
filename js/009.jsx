@@ -1,36 +1,36 @@
-function App(){
+function App() {
   return (
     <div>
       <h1>Hello World</h1>
       <Box1 />
-      <Box1 name="Enoch"/>
+      <Box1 name="Enoch" />
       <Box2 />
-      <Box2 name="Qin"/>
+      <Box2 name="Qin" />
     </div>
   )
 }
 
-class Box1 extends React.Component{
-  constructor(props){
+class Box1 extends React.Component {
+  constructor(props) {
     super(props)
     this.state = {
       number: 0
     }
   }
 
-  add(){
+  add() {
     this.setState({
       number: this.state.number + 1
     })
   }
-  minus(){
+  minus() {
     this.setState({
       number: this.state.number - 1
     })
   }
 
-  render(){
-    return(
+  render() {
+    return (
       <div className="border">
         <span className="red">{this.state.number}</span>
         <button onClick={this.add.bind(this)}>+</button>
@@ -41,24 +41,24 @@ class Box1 extends React.Component{
   }
 }
 
-class Box2 extends React.Component{
-  constructor(props){
+class Box2 extends React.Component {
+  constructor(props) {
     super(props)
     this.state = {
       number: 0
     }
   }
-  add(){
+  add() {
     this.setState({
       number: this.state.number + 2
     })
   }
-  minus(){
+  minus() {
     this.setState({
       number: this.state.number - 2
     })
   }
-  render(){
+  render() {
     return (
       <div>
         <span className="green">{this.state.number}</span>

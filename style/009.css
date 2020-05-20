@@ -7,3 +7,18 @@
 .green{
   color: green;
 }
+.wrap{
+  border: 1px solid;
+  padding: 20px;
+  overflow: hidden;
+}
+.record{
+  display: flex;
+  justify-content: center;
+}
+.animal{
+  border-bottom: 1px solid green;
+}
+.player{
+  text-align: left;
+}
