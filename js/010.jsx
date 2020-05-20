@@ -4,30 +4,38 @@ class App extends React.Component {
     this.state = {
       rabbitTime: 0,
       tortoiseTime: 0,
-      initialTime: new Date()
     }
   }
-  rabbitArrive(params) {
-    let time = new Date() - this.state.initialTime
+  rabbitArrive(spendTime) {
     this.setState({
-      rabbitTime: time
+      rabbitTime: spendTime
     })
-    console.log(params)
   }
-  tortoiseArrive(params) {
-    let time = new Date() - this.state.initialTime
+  tortoiseArrive(spendTime) {
     this.setState({
-      tortoiseTime: time
+      tortoiseTime: spendTime
     })
-    console.log(params)
   }
   render() {
     return (
       <div className="wrap">
         <h1>Hello World</h1>
         <TimeRecord rabbitTime={this.state.rabbitTime} tortoiseTime={this.state.tortoiseTime} />
-        <Rabbit arrive={this.rabbitArrive.bind(this)} />
-        <Tortoise arrive={this.tortoiseArrive.bind(this)} />
+        <Playground rabbitArrive={this.rabbitArrive.bind(this)} tortoiseArrive={this.tortoiseArrive.bind(this)} />
+      </div>
+    )
+  }
+}
+
+class Playground extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+  render() {
+    return (
+      <div className="playground-wrap">
+        <Rabbit arrive={this.props.rabbitArrive.bind(this)} />
+        <Tortoise arrive={this.props.tortoiseArrive.bind(this)} />
       </div>
     )
   }
@@ -58,7 +66,8 @@ class Rabbit extends React.Component {
     this.state = {
       style: {
         transform: `translateX(${distence}%)`
-      }
+      },
+      initialTime: new Date()
     }
     let timerId = setInterval(() => {
       distence += 25
@@ -69,7 +78,7 @@ class Rabbit extends React.Component {
       })
       if (distence >= 100) {
         window.clearInterval(timerId)
-        this.props.arrive("rabbit")
+        this.props.arrive(new Date() - this.state.initialTime)
       }
     }, 1000)
   }
@@ -90,7 +99,8 @@ class Tortoise extends React.Component {
     this.state = {
       style: {
         transform: `translateX(${distence}%)`
-      }
+      },
+      initialTime: new Date()
     }
     let timerId = setInterval(() => {
       distence += 20
@@ -101,7 +111,7 @@ class Tortoise extends React.Component {
       })
       if (distence >= 100) {
         window.clearInterval(timerId)
-        this.props.arrive("tortoise")
+        this.props.arrive(new Date() - this.state.initialTime)
       }
     }, 1000)
   }
