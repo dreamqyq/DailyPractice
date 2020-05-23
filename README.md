@@ -16,3 +16,5 @@
 - 009: React Class组件
 - 010: React 龟兔赛跑
 - 011: React 九宫格游戏
+- 012: React 组件通信（EventHub） 
+- 013: React 九宫格游戏（Redux）

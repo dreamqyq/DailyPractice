@@ -8,10 +8,23 @@
   color: green;
 }
 .wrap,
+.parent-wrap,
 .playground-wrap{
   border: 1px solid;
   padding: 20px;
   overflow: hidden;
+}
+.parent-wrap{
+  display: flex;
+  justify-content: center;
+  border: none;
+  padding: 0;
+}
+.parent-wrap div{
+  margin: 15px;
+}
+.wrap.son{
+  border-color: red;
 }
 .record{
   display: flex;
