@@ -4,13 +4,29 @@ var money = {
 
 var fnLists = {}
 var eventHub = {
-  on() {
-
+  on(eventName, fn) {
+    if (!fnLists[eventName]) {
+      fnLists[eventName] = []
+    }
+    fnLists[eventName].push(fn)
   },
-  trigger() {
-
+  trigger(eventName, params) {
+    if (!fnLists[eventName]) { return }
+    fnLists[eventName].forEach(fn => {
+      fn.call(undefined, params)
+    })
   }
 }
+
+var listener = {
+  init() {
+    eventHub.on("spend", (data) => {
+      money.amount -= data
+      render()
+    })
+  }
+}
+listener.init()
 
 class App extends React.Component {
   constructor(props) {
@@ -22,7 +38,7 @@ class App extends React.Component {
       <div className="wrap">
         <h1>Hello React</h1>
         <div className="wrap">
-          {this.props.money.amount}
+          {money.amount}
           <div className="parent-wrap">
             <Parent1 money={money} />
             <Parent2 money={money} />
@@ -37,7 +53,7 @@ class Parent1 extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      money: this.props.money
+      money: money
     }
   }
   render() {
@@ -55,7 +71,7 @@ class Parent2 extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      money: this.props.money
+      money: money
     }
   }
   render() {
@@ -72,7 +88,7 @@ class Son1 extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      money: this.props.money
+      money: money
     }
   }
   render() {
@@ -87,22 +103,27 @@ class Son2 extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      money: this.props.money
+      money: money
     }
   }
+  // 直接修改money
+  // spendMoney() {
+  //   money.amount -= 100
+  //   this.setState({
+  //     money: money
+  //   })
+  //   render()
+  // }
+
+  // 使用eventHub
   spendMoney() {
-    this.setState({
-      money: {
-        amount: this.state.money.amount - 100
-      }
-    })
-    render()
+    eventHub.trigger("spend", 100)
   }
   render() {
     return (
       <div className="wrap son">
         Son2: {this.state.money.amount}
-        <button onClick={() => this.spendMoney()}>spend</button>
+        <button onClick={() => this.spendMoney()}>spend 100</button>
       </div>
     )
   }
@@ -112,13 +133,17 @@ class Son3 extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      money: this.props.money
+      money: money
     }
+  }
+  spendMoney() {
+    eventHub.trigger("spend", 200)
   }
   render() {
     return (
       <div className="wrap son">
         Son3: {this.state.money.amount}
+        <button onClick={() => this.spendMoney()}>spend 200</button>
       </div>
     )
   }
@@ -128,7 +153,7 @@ class Son4 extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      money: this.props.money
+      money: money
     }
   }
   render() {
@@ -143,9 +168,6 @@ class Son4 extends React.Component {
 
 render()
 function render() {
-  console.log(1);
-
-
   ReactDOM.render(
     <App money={money} />,
     document.querySelector("#root")
