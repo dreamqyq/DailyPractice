@@ -1,39 +1,30 @@
-var money = {
-  amount: 100000
-}
-
-var fnLists = {}
-var eventHub = {
-  on(eventName, fn) {
-    if (!fnLists[eventName]) {
-      fnLists[eventName] = []
+let createStore = Redux.createStore
+let reducer = (state, action) => {
+  state = state || {
+    money: {
+      amount: 100000
     }
-    fnLists[eventName].push(fn)
-  },
-  trigger(eventName, params) {
-    if (!fnLists[eventName]) { return }
-    fnLists[eventName].forEach(fn => {
-      fn.call(undefined, params)
-    })
+  }
+
+  switch(action.type){
+    case "spend":
+      return {
+        money: {
+          amount: state.money.amount - action.payload
+        }
+      }
+    case "event1":
+      break;
+    default: 
+      return state
   }
 }
 
-var listener = {
-  init() {
-    eventHub.on("spend", (data) => {
-      money.amount -= data
-      render()
-    })
-  }
-}
-listener.init()
-
+const store = createStore(reducer)
 class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      store: money
-    }
+    console.log(props)
   }
 
   render() {
@@ -41,10 +32,10 @@ class App extends React.Component {
       <div className="wrap">
         <h1>Hello React</h1>
         <div className="wrap">
-          {this.state.store.amount}
+          {this.props.store.money.amount}
           <div className="parent-wrap">
-            <Parent1 money={this.state.store} />
-            <Parent2 money={this.state.store} />
+            <Parent1 money={this.props.store.money} />
+            <Parent2 money={this.props.store.money} />
           </div>
         </div>
       </div>
@@ -97,18 +88,11 @@ class Son2 extends React.Component {
   constructor(props) {
     super(props)
   }
-  // 直接修改money
-  // spendMoney() {
-  //   money.amount -= 100
-  //   this.setState({
-  //     money: money
-  //   })
-  //   render()
-  // }
-
-  // 使用eventHub
   spendMoney() {
-    eventHub.trigger("spend", 100)
+    store.dispatch({
+      type: "spend",
+      payload: 100
+    })
   }
   render() {
     return (
@@ -125,7 +109,10 @@ class Son3 extends React.Component {
     super(props)
   }
   spendMoney() {
-    eventHub.trigger("spend", 200)
+    store.dispatch({
+      type: "spend",
+      payload: 200
+    })
   }
   render() {
     return (
@@ -154,7 +141,9 @@ class Son4 extends React.Component {
 render()
 function render() {
   ReactDOM.render(
-    <App money={money} />,
+    <App store={store.getState()} />,
     document.querySelector("#root")
   )
 }
+
+store.subscribe(render)
