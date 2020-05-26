@@ -18,3 +18,4 @@
 - 011: React 九宫格游戏
 - 012: React 组件通信（EventHub） 
 - 013: React 组件通信（Redux）
+- 014: VanillaJs x Redux demo

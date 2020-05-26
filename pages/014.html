@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VanillaJs x Redux</title>
+  <link rel="stylesheet" href="../style/009.css">
+  <script src="https://cdn.bootcdn.net/ajax/libs/redux/4.0.5/redux.min.js"></script>
+</head>
+
+<body>
+  <div id="root" class="wrap"></div>
+
+  <script>
+    const root = document.querySelector("#root")
+    const store = Redux.createStore((state, action) => {
+      state = state || 0
+      switch (action.type) {
+        case "add":
+          state += action.payload
+          break
+        case "minus":
+          state -= action.payload
+          break
+        case "addIfOdd":
+          if (state % 2 === 1) {
+            state += action.payload
+          }
+          break
+        default:
+          return state
+      }
+
+      return state
+    })
+    let count = 0
+
+    function add1() {
+      store.dispatch({
+        type: "add",
+        payload: 1
+      })
+    }
+    function minus1() {
+      store.dispatch({
+        type: "minus",
+        payload: 1
+      })
+    }
+    function add1IfOdd() {
+      store.dispatch({
+        type: "addIfOdd",
+        payload: 1
+      })
+    }
+    function add1Async() {
+      setTimeout(() => {
+        store.dispatch({
+          type: "add",
+          payload: 1
+        })
+      }, 1000)
+    }
+
+    render()
+    function render() {
+      root.innerHTML = `
+        <p>你点击了 ${store.getState()} 次</p>
+        <button onclick="add1()">+1</button>
+        <button onclick="minus1()">-1</button>
+        <button onclick="add1IfOdd()">数字为单数，+1</button>
+        <button onclick="add1Async()">1秒后+1</button>
+      `
+    }
+    store.subscribe(render)
+  </script>
+</body>
+
+</html>
