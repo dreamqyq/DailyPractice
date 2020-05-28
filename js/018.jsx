@@ -1,8 +1,9 @@
 function App() {
-  const [tab, setTab] = React.useState("tab1")
+  const [tab, setTab] = React.useState(
+    window.location.hash.substr(1)
+  )
 
   const showTab = () => {
-    const tab = window.location.hash.substr(1)
     switch (tab) {
       case "tab1":
         return <Tab1 />
@@ -17,6 +18,13 @@ function App() {
 
   const changeTabAndHash = (tab) => {
     window.location.hash = tab
+    /**
+     * 按照上一版的写法，当hash为「tab3」，点击切换成「tab1」会不触发页面render ---> 原因如下
+     * state 里存的 tab 始终是 「tab1」，setTab 成 tab1，则不触发render
+     * 当点击其他的按钮，react检测到tab从「tab1」变成了其他的值，才会重新触发render
+     * 
+     * 需要 useState 的时候根据 hash 设置 tab 的默认值
+     */
     setTab(tab)
   }
 
