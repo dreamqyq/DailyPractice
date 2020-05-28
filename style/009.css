@@ -36,3 +36,10 @@
 .player{
   text-align: left;
 }
+
+.wrap.green{
+  border-color: green;
+}
+.wrap.red{
+  border-color: red;
+}
