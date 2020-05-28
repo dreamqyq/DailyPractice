@@ -1,4 +1,5 @@
 function App() {
+  // window.location.pathname
   const [tab, setTab] = React.useState(
     window.location.hash.substr(1)
   )
@@ -17,6 +18,8 @@ function App() {
   }
 
   const changeTabAndHash = (tab) => {
+    // pushState 写法：
+    // window.history.pushState(null, "", `/${tab}`)
     window.location.hash = tab
     /**
      * 按照上一版的写法，当hash为「tab3」，点击切换成「tab1」会不触发页面render ---> 原因如下
