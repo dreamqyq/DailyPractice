@@ -10,6 +10,7 @@
 .wrap,
 .parent-wrap,
 .wrap-shadow,
+.console-wrap,
 .playground-wrap{
   border: 1px solid;
   padding: 20px;
@@ -44,6 +45,12 @@
 .wrap.red{
   border-color: red;
 }
+.console-wrap,
 .wrap-shadow{
   box-shadow: 0 0 3px #000;
+}
+.console-wrap{
+  margin: 20px auto;
+  text-align: left;
+  width: 400px;
 }
