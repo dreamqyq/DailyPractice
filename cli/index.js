@@ -53,8 +53,8 @@ const writeWhiteFile = async (type, nextIndex) => {
 
 const writeHTMLFile = async (nextIndex, commandArgs) => {
   const styleLink = `\n  <link rel="stylesheet" href="../style/${nextIndex}.css">`;
-  const jsScript = `\n  <script src="../js/${nextIndex}.js"></script>`
-  const jsxScript = `\n  <script type="text/babel" src="../js/${nextIndex}.jsx"></script>`
+  const jsScript = `\n  <script src="../js/${nextIndex}.js"></script>`;
+  const jsxScript = `\n  <script type="text/babel" src="../js/${nextIndex}.jsx"></script>`;
   const HTMLTemplate = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,6 +70,19 @@ const writeHTMLFile = async (nextIndex, commandArgs) => {
   const filePath = path.join(__dirname, `../pages/${nextIndex}.html`);
   await db.write(filePath, HTMLTemplate);
   consoleSuccess(`${nextIndex}.html create success!`);
+  await insertHTMLtoIndexCatalog(nextIndex, commandArgs.name);
+};
+
+const insertHTMLtoIndexCatalog = async (nextIndex, name) => {
+  const indexHTMLPath = path.join(__dirname, "../index.html");
+  const indexHTML = await db.read(indexHTMLPath);
+  const newPracticeLink = `<li><a href="./pages/${nextIndex}.html">${nextIndex}: ${name}</a></li>`;
+  const result = indexHTML.replace(
+    /<\/ol>/,
+    `  ${newPracticeLink} \n      </ol>`
+  );
+  await db.write(indexHTMLPath, result);
+  consoleSuccess(`create practice ${nextIndex}: ${name} success!`);
 };
 
 const main = async () => {
@@ -79,9 +92,9 @@ const main = async () => {
     const readmeContent = await db.read(path.join(__dirname, "../README.md"));
     const nextIndex = await getNextPracticeIndex(readmeContent);
     await writeInREADME(readmeContent, nextIndex, args.name);
-    args.js && await writeWhiteFile("js", nextIndex);
-    args.jsx && await writeWhiteFile("jsx", nextIndex);
-    args.css && await writeWhiteFile("css", nextIndex);
+    args.js && (await writeWhiteFile("js", nextIndex));
+    args.jsx && (await writeWhiteFile("jsx", nextIndex));
+    args.css && (await writeWhiteFile("css", nextIndex));
     args.html && (await writeHTMLFile(nextIndex, args));
   }
 };

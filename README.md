@@ -6,11 +6,11 @@
 
 ### 支持自动创建新的练习文件脚本
 
-命令：`node cli`，根据 `README.md`的目录列表，自增练习文件序号。自动创建的文件均以练习序号为名。
+命令：`node cli`，根据 `README.md`的目录列表，自增练习文件序号。自动创建的文件均以练习序号为名。新增练习会自动插入到`README.md`、`index.html` 的目录列表。
 
 参数如下：
 
-- `--name` 必填项；练习名称，会自动插入到 `html` 文件的 `title` 属性，自动插入到`README.md` 的目录列表。
+- `--name` 必填项；练习名称，会自动写入到 `html` 文件的 `title` 属性。
 - `js`、`css`、`html`、`jsx`，可选项；参数中有的属性，就会同时创建该文件，并自动在创建的 `html` 文件中引入。
 
 示例：`node cli css js html jsx --name "Practice Name 1"`
