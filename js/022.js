@@ -103,6 +103,51 @@ const deepCopy4 = source => {
   return deepCopy4Inner(source);
 };
 
+class DeepClone5 {
+  constructor() {
+    this.caches = [];
+  }
+  clone(source) {
+    if (source instanceof Object) {
+      let cacheDist = this.findCache(this.caches, source);
+      if (cacheDist) {
+        return cacheDist;
+      } else {
+        let dist;
+        if (source instanceof Array) {
+          dist = new Array();
+        } else if (source instanceof Function) {
+          dist = () => {
+            return source.apply(this, arguments);
+          };
+        } else if (source instanceof RegExp) {
+          dist = new RegExp(source.source, source.flags);
+        } else if (source instanceof Date) {
+          dist = new Date(source);
+        } else {
+          dist = new Object();
+        }
+        this.caches.push([source, dist]);
+        for (let key in source) {
+          if (source.hasOwnProperty(key)) {
+            dist[key] = this.clone(source[key]);
+          }
+        }
+        return dist;
+      }
+    } else {
+      return source;
+    }
+  }
+  findCache(source) {
+    for (let i = 0; i < this.caches.length; i++) {
+      if (this.caches[i][0] === source) {
+        return this.caches[i][1];
+      }
+    }
+  }
+}
+
 const main = () => {
   const obj = { a: 1, b: { x: 10 } };
   const fun = (x, y) => x + y;
@@ -140,6 +185,8 @@ const main = () => {
   console.log('result44', obj44);
   console.log('result44', result44 === obj44);
   console.log('result44', 'name' in obj44, 'name' in result44);
+  const result51 = new DeepClone5().clone(obj);
+  console.log('result51', obj === result51);
 };
 
 main();
