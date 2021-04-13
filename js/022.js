@@ -65,7 +65,7 @@ const findCache = (caches, source) => {
   }
 };
 
-// 递归克隆（考虑环）,可以复制 Date，RegExp
+// 递归克隆（考虑环）,可以复制 Date，RegExp，不复制原型属性
 const deepCopy4 = source => {
   const caches = [];
   const deepCopy4Inner = source => {
@@ -90,7 +90,9 @@ const deepCopy4 = source => {
         }
         caches.push([source, dist]);
         for (let key in source) {
-          dist[key] = deepCopy4Inner(source[key]);
+          if (source.hasOwnProperty(key)) {
+            dist[key] = deepCopy4Inner(source[key]);
+          }
         }
         return dist;
       }
@@ -132,6 +134,12 @@ const main = () => {
   console.log('result43', result43 === obj43);
   console.log('result43', result43.source === obj43.source);
   console.log('result43', result43.flags === obj43.flags);
+  const obj44 = Object.create({ name: 'Enoch' });
+  obj44.a = 1;
+  const result44 = deepCopy4(obj44);
+  console.log('result44', obj44);
+  console.log('result44', result44 === obj44);
+  console.log('result44', 'name' in obj44, 'name' in result44);
 };
 
 main();
