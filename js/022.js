@@ -6,29 +6,62 @@ const deepCopy1 = source => {
 // 递归克隆
 const deepCopy2 = source => {
   if (source instanceof Object) {
+    let dist;
     if (source instanceof Array) {
-      const dist = new Array();
-      for (let key in source) {
-        dist[key] = deepCopy2(source[key]);
-      }
-      return dist;
+      dist = new Array();
     } else if (source instanceof Function) {
-      const dist = function () {
+      dist = function () {
         return source.apply(this, arguments);
       };
-      for (let key in source) {
-        dist[key] = deepCopy2(source[key]);
-      }
-      return dist;
     } else {
-      const dist = new Object();
-      for (let key in source) {
-        dist[key] = deepCopy2(source[key]);
-      }
-      return dist;
+      dist = new Object();
     }
+    for (let key in source) {
+      dist[key] = deepCopy2(source[key]);
+    }
+    return dist;
   } else {
     return source;
+  }
+};
+
+// 递归克隆（考虑环）
+const deepCopy3 = source => {
+  const caches = [];
+  const deepCopy3Inner = source => {
+    if (source instanceof Object) {
+      let cacheDist = findCache(caches, source);
+      if (cacheDist) {
+        return cacheDist;
+      } else {
+        let dist;
+        if (source instanceof Array) {
+          dist = new Array();
+        } else if (source instanceof Function) {
+          dist = () => {
+            return source.apply(this, arguments);
+          };
+        } else {
+          dist = new Object();
+        }
+        caches.push([source, dist]);
+        for (let key in source) {
+          dist[key] = deepCopy3Inner(source[key]);
+        }
+        return dist;
+      }
+    } else {
+      return source;
+    }
+  };
+  return deepCopy3Inner(source);
+};
+
+const findCache = (caches, source) => {
+  for (let i = 0; i < caches.length; i++) {
+    if (caches[i][0] === source) {
+      return caches[i][1];
+    }
   }
 };
 
@@ -44,6 +77,11 @@ const main = () => {
   console.log(fun === result22);
   console.dir(result22);
   console.log(result22(1, 2));
+  const obj3 = { c: 10, d: obj };
+  obj3.self = obj3;
+  const result31 = deepCopy3(obj3);
+  console.log(result31);
+  console.log(result31.self === obj3.self);
 };
 
 main();
