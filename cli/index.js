@@ -7,8 +7,9 @@ const getCommandArgv = () => {
   const args = process.argv.slice(2);
   const result = {
     js: args.includes('js'),
-    css: args.includes('css'),
+    ts: args.includes('ts'),
     jsx: args.includes('jsx'),
+    css: args.includes('css'),
     html: args.includes('html'),
     name: ''
   };
@@ -38,10 +39,11 @@ const writeInREADME = async (readmeContent, nextIndex, name) => {
   consoleSuccess('README.md write success!');
 };
 
-// write css, js, jsx file
+// write css, js, ts, jsx file
 const writeWhiteFile = async (type, nextIndex) => {
   const pathHash = {
     js: 'js',
+    ts: 'js',
     jsx: 'js',
     css: 'style'
   };
@@ -54,6 +56,7 @@ const writeWhiteFile = async (type, nextIndex) => {
 const writeHTMLFile = async (nextIndex, commandArgs) => {
   const styleLink = `\n  <link rel="stylesheet" href="../style/${nextIndex}.css">`;
   const jsScript = `\n  <script src="../js/${nextIndex}.js"></script>`;
+  const tsScript = `\n  <script src="../js/${nextIndex}.ts"></script>`;
   const jsxScript = `\n  <script type="text/babel" src="../js/${nextIndex}.jsx"></script>`;
   const HTMLTemplate = `<!DOCTYPE html>
 <html lang="en">
@@ -63,7 +66,9 @@ const writeHTMLFile = async (nextIndex, commandArgs) => {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${commandArgs.name}</title>${commandArgs.css ? styleLink : ''}
 </head>
-<body>${commandArgs.jsx ? jsxScript : ''}${commandArgs.js ? jsScript : ''}
+<body>${commandArgs.jsx ? jsxScript : ''}${commandArgs.js ? jsScript : ''}${
+    commandArgs.ts ? tsScript : ''
+  }
 </body>
 </html>
   `;
@@ -94,6 +99,7 @@ const main = async () => {
     await writeInREADME(readmeContent, nextIndex, args.name);
     args.js && (await writeWhiteFile('js', nextIndex));
     args.jsx && (await writeWhiteFile('jsx', nextIndex));
+    args.ts && (await writeWhiteFile('ts', nextIndex));
     args.css && (await writeWhiteFile('css', nextIndex));
     args.html && (await writeHTMLFile(nextIndex, args));
   }

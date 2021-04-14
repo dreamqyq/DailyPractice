@@ -11,7 +11,7 @@
 参数如下：
 
 - `--name` 必填项；练习名称，会自动写入到 `html` 文件的 `title` 属性。
-- `js`、`css`、`html`、`jsx`，可选项；参数中有的属性，就会同时创建该文件，并自动在创建的 `html` 文件中引入。
+- `js`、`css`、`html`、`jsx`、`ts`，可选项；参数中有的属性，就会同时创建该文件，并自动在创建的 `html` 文件中引入。
 
 示例：`node cli css js html jsx --name "Practice Name 1"`
 
