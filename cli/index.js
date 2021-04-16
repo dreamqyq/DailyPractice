@@ -43,7 +43,7 @@ const writeInREADME = async (readmeContent, nextIndex, name) => {
 const writeWhiteFile = async (type, nextIndex) => {
   const pathHash = {
     js: 'js',
-    ts: 'js',
+    ts: 'ts',
     jsx: 'js',
     css: 'style'
   };
@@ -66,8 +66,8 @@ const writeHTMLFile = async (nextIndex, commandArgs) => {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>${commandArgs.name}</title>${commandArgs.css ? styleLink : ''}
 </head>
-<body>${commandArgs.jsx ? jsxScript : ''}${commandArgs.js ? jsScript : ''}${
-    commandArgs.ts ? tsScript : ''
+<body>${commandArgs.jsx ? jsxScript : ''}${
+    commandArgs.js || commandArgs.ts ? jsScript : ''
   }
 </body>
 </html>
