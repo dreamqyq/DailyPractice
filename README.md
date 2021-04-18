@@ -42,3 +42,4 @@
 - 021: CSS Grid Layout
 - 022: Deep Copy
 - 023: Cool Button
+- 024: EventHub(TypeScript)
