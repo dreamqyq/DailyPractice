@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EatMan</title>
+  </head>
+  <body>
+    <div>
+      <h1>实现一个 EatMan</h1>
+      <p>说明:实现一个 EatMan，EatMan 可以有以下一些行为</p>
+      <ol>
+        <li>
+          <p>EatMan('Hank'); 输出</p>
+          <ul>
+            <li>Hi This is Hank!</li>
+          </ul>
+        </li>
+        <li>
+          <p>EatMan('Hank').eat('dinner').eat('supper'); 输出</p>
+          <ul>
+            <li>Hi This is Hank!</li>
+            <li>Eat dinner~</li>
+            <li>Eat supper~</li>
+          </ul>
+        </li>
+        <li>
+          <p>EatMan('Hank').eat('dinner').eatFirst('lunch'); 输出</p>
+          <ul>
+            <li>Eat lunch~</li>
+            <li>Hi This is Hank!</li>
+            <li>Eat dinner~</li>
+          </ul>
+        </li>
+        <li>
+          <p>
+            EatMan('Hank').eat('dinner').eatFirst('lunch').eatFirst('breakfast');
+            输出
+          </p>
+          <ul>
+            <li>Eat breakfast~</li>
+            <li>Eat lunch~</li>
+            <li>Hi This is Hank!</li>
+            <li>Eat dinner~</li>
+          </ul>
+        </li>
+      </ol>
+    </div>
+    <button id="one">EatMan('Hank')</button> <br />
+    <button id="two">EatMan('Hank').eat('dinner').eat('supper')</button> <br />
+    <button id="three">EatMan('Hank').eat('dinner').eatFirst('lunch')</button>
+    <br />
+    <button id="four">
+      EatMan('Hank').eat('dinner').eatFirst('lunch').eatFirst('breakfast')
+    </button>
+    <script src="../js/025.js"></script>
+  </body>
+</html>
