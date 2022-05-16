@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculate Date</title>
+    <style>
+      body {
+        border: 1px solid;
+        width: 300px;
+        margin: 30px auto;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Calculate Date</h1>
+    <span>Date</span>
+    <input type="date" id="date" value="2022-03-29" />
+    <button id="dateSubmit">submit</button>
+    <p>Days: <span id="dateResult"></span></p>
+    <hr />
+    <span>Days</span>
+    <input type="number" id="days" value="100" />
+    <button id="daysSubmit">submit</button>
+    <p>Date: <span id="daysResult"></span></p>
+    <hr />
+    <input type="date" id="diff1" value="2022-03-29" />
+    <input type="date" id="diff2" value="2022-03-30" />
+    <div style="margin-top: 10px">
+      isCoverStart: <input type="checkbox" id="isCover" />
+      <button id="diffSubmit">submit</button>
+    </div>
+    <p>Diff: <span id="diffResult"></span></p>
+    <script src="../js/028.js"></script>
+  </body>
+</html>
